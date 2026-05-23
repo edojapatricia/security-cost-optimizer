@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
-import { Syne, Space_Mono, DM_Sans } from "next/font/google";
+import { Source_Serif_4, Source_Sans_3, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
-  variable: "--font-syne",
+const sourceSerif4 = Source_Serif_4({
+  variable: "--font-serif-4",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["400", "600", "700"],
 });
 
-const spaceMono = Space_Mono({
-  variable: "--font-space",
+const sourceSans3 = Source_Sans_3({
+  variable: "--font-sans-3",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["300", "400", "600", "700"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-dm",
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono-jb",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "700"],
 });
 
 export const metadata: Metadata = {
@@ -29,7 +29,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${spaceMono.variable} ${dmSans.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${sourceSerif4.variable} ${sourceSans3.variable} ${jetbrainsMono.variable} h-full`}
+    >
       <body className="min-h-full">{children}</body>
     </html>
   );

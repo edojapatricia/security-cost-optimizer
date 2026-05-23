@@ -1,141 +1,121 @@
 @import "tailwindcss";
 
-/* ─── Design System ──────────────────────────────────────────── */
+/* ─── Kami Design Tokens ─────────────────────────────────────── */
 :root {
-  --bg-base:      #030B07;
-  --bg-surface:   #081510;
-  --bg-elevated:  #0C1D16;
-  --bg-glass:     rgba(6, 18, 11, 0.82);
+  /* Surfaces */
+  --parchment:   #f5f4ed;
+  --ivory:       #faf9f5;
+  --warm-sand:   #e8e6dc;
 
-  --lime:         #B8FF47;
-  --lime-glow:    rgba(184, 255, 71, 0.22);
-  --lime-dim:     rgba(184, 255, 71, 0.08);
-  --amber:        #FFB020;
-  --amber-glow:   rgba(255, 176, 32, 0.18);
-  --amber-dim:    rgba(255, 176, 32, 0.09);
-  --coral:        #FF4C5E;
-  --coral-dim:    rgba(255, 76, 94, 0.1);
-  --mint:         #00E5A0;
-  --mint-dim:     rgba(0, 229, 160, 0.1);
+  /* Brand */
+  --brand:       #1B365D;
+  --brand-light: #2D5A8A;
+  --brand-dim:   rgba(27, 54, 93, 0.07);
+  --brand-mid:   rgba(27, 54, 93, 0.16);
 
-  --text-primary:   #DFF0E6;
-  --text-secondary: rgba(223, 240, 230, 0.5);
-  --text-muted:     rgba(223, 240, 230, 0.22);
-  --border:         rgba(184, 255, 71, 0.065);
-  --border-hover:   rgba(184, 255, 71, 0.22);
+  /* Text */
+  --near-black:  #141413;
+  --dark-warm:   #3d3d3a;
+  --olive:       #504e49;
+  --stone:       #6b6a64;
+  --fog:         #9a9891;
+
+  /* Borders */
+  --border:      #e8e6dc;
+  --border-mid:  #c8c4b4;
+
+  /* Tag tints */
+  --tag-light:   #EEF2F7;
+  --tag-mid:     #E4ECF5;
+  --tag-deep:    #D0DCE9;
+
+  /* Status colours — warm, editorial */
+  --amber-bg:     #FEF9EC;
+  --amber-text:   #6B4500;
+  --amber-border: #DEC87A;
+  --red-bg:       #FDEEED;
+  --red-text:     #7A2020;
+  --red-border:   #D9AAAA;
+  --green-bg:     #EBF6F0;
+  --green-text:   #1A5E3A;
+  --green-border: #A4D4BB;
 }
 
 @theme inline {
-  --font-sans:    var(--font-dm);
-  --font-mono:    var(--font-space);
-  --font-display: var(--font-syne);
+  --font-sans:    var(--font-sans-3);
+  --font-mono:    var(--font-mono-jb);
+  --font-display: var(--font-serif-4);
 }
 
-/* ─── Body & Background ──────────────────────────────────────── */
+/* ─── Base ───────────────────────────────────────────────────── */
 html, body { height: 100%; }
 
 body {
-  background-color: var(--bg-base);
-  background-image:
-    radial-gradient(ellipse 60% 50% at 10% 35%, rgba(4, 50, 22, 0.55) 0%, transparent 100%),
-    radial-gradient(ellipse 50% 60% at 88% 70%, rgba(2, 28, 12, 0.65) 0%, transparent 100%),
-    radial-gradient(rgba(184, 255, 71, 0.028) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 26px 26px;
-  color: var(--text-primary);
-  font-family: var(--font-dm), 'DM Sans', system-ui, sans-serif;
+  background-color: var(--parchment);
+  color: var(--near-black);
+  font-family: var(--font-sans-3), 'Source Sans 3', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ─── Scrollbar ──────────────────────────────────────────────── */
-::-webkit-scrollbar       { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
-::-webkit-scrollbar-thumb { background: rgba(184,255,71,0.18); border-radius: 4px; }
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--warm-sand); }
+::-webkit-scrollbar-thumb { background: var(--brand-mid); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(27, 54, 93, 0.35); }
 
-/* ─── Glass Card ─────────────────────────────────────────────── */
-.glass {
-  background: var(--bg-glass);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+/* ─── Card surface ───────────────────────────────────────────── */
+.card {
+  background: var(--ivory);
   border: 1px solid var(--border);
 }
 
-/* ─── Gradient Text ──────────────────────────────────────────── */
-.text-lime-grad {
-  background: linear-gradient(110deg, var(--lime) 0%, var(--mint) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ─── Glow utilities ─────────────────────────────────────────── */
-.glow-lime  { box-shadow: 0 0 18px var(--lime-glow), 0 0 40px rgba(184,255,71,0.08); }
-.glow-amber { box-shadow: 0 0 18px var(--amber-glow); }
-
-/* ─── Pulse dot ──────────────────────────────────────────────── */
-@keyframes pulse-ring {
-  0%   { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
-.pulse-dot::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: var(--lime);
-  animation: pulse-ring 1.8s ease-out infinite;
-}
-
-/* ─── Scan animation ─────────────────────────────────────────── */
-@keyframes scan {
-  0%   { transform: translateY(-100%); opacity: 0; }
-  10%  { opacity: 0.4; }
-  90%  { opacity: 0.4; }
-  100% { transform: translateY(600%); opacity: 0; }
-}
-.scan-line {
-  position: absolute;
-  left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--lime), transparent);
-  animation: scan 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* ─── Row hover ──────────────────────────────────────────────── */
-.tool-row:hover { background: rgba(184, 255, 71, 0.035); }
+/* ─── Tool row hover ─────────────────────────────────────────── */
+.tool-row:hover { background: var(--tag-light); }
 .tool-row:hover .row-bar { opacity: 1; }
 .row-bar { opacity: 0; transition: opacity 0.2s; }
-
-/* ─── Button glow on hover ───────────────────────────────────── */
-.btn-lime:hover {
-  box-shadow: 0 0 24px var(--lime-glow), 0 4px 16px rgba(0,0,0,0.4);
-}
-.btn-run:hover {
-  box-shadow: 0 0 32px rgba(184,255,71,0.25), 0 8px 24px rgba(0,0,0,0.5);
-  transform: translateY(-1px);
-}
-.btn-run { transition: all 0.25s ease; }
 
 /* ─── Input focus ────────────────────────────────────────────── */
 .inp:focus {
   outline: none;
-  border-color: rgba(184, 255, 71, 0.4) !important;
-  box-shadow: 0 0 0 3px rgba(184, 255, 71, 0.07);
+  border-color: var(--brand) !important;
+  box-shadow: 0 0 0 3px rgba(27, 54, 93, 0.10);
 }
 
-/* ─── Progress ring ──────────────────────────────────────────── */
-.ring-progress {
-  filter: drop-shadow(0 0 6px rgba(184,255,71,0.6));
-  transition: stroke-dasharray 1s ease;
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--brand);
+  color: var(--ivory);
+  border: 1px solid var(--brand);
+  transition: background 0.18s, border-color 0.18s;
+  cursor: pointer;
 }
+.btn-primary:hover:not(:disabled) { background: var(--brand-light); border-color: var(--brand-light); }
+.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--brand);
+  border: 1px solid var(--brand);
+  transition: background 0.18s;
+  cursor: pointer;
+}
+.btn-ghost:hover:not(:disabled) { background: var(--brand-dim); }
 
 /* ─── Stagger fade-in ────────────────────────────────────────── */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
-.fade-up { animation: fadeUp 0.5s ease both; }
-.fade-up-1 { animation-delay: 0.05s; }
-.fade-up-2 { animation-delay: 0.12s; }
-.fade-up-3 { animation-delay: 0.19s; }
-.fade-up-4 { animation-delay: 0.26s; }
-.fade-up-5 { animation-delay: 0.33s; }
+.fade-up   { animation: fadeUp 0.4s ease both; }
+.fade-up-1 { animation-delay: 0.04s; }
+.fade-up-2 { animation-delay: 0.09s; }
+.fade-up-3 { animation-delay: 0.14s; }
+.fade-up-4 { animation-delay: 0.19s; }
+.fade-up-5 { animation-delay: 0.25s; }
+
+/* ─── Spinner ────────────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ─── Progress ring ──────────────────────────────────────────── */
+.ring-progress { transition: stroke-dasharray 1s ease; }

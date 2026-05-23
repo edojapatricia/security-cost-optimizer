@@ -31,9 +31,16 @@ export interface Alternative {
   name: string
   vendor: string
   estimatedMonthlyCost: number
+  priceVerified: boolean        // true = price confirmed from a live search result
+  priceSource?: string          // URL or page where the price was found
   savings: number
   notes: string
   complianceSuitable: boolean
+}
+
+export interface Source {
+  title: string
+  url: string
 }
 
 export interface AnalysisResult {
@@ -45,4 +52,5 @@ export interface AnalysisResult {
   redundancyReason: string
   alternatives: Alternative[]
   prioritizedActions: string[]
+  sources?: Source[]
 }

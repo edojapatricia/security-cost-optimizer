@@ -24,24 +24,24 @@ interface Props {
 
 const labelStyle: React.CSSProperties = {
   display: 'block',
-  fontSize: '0.65rem',
-  fontFamily: 'var(--font-space)',
-  letterSpacing: '0.12em',
+  fontFamily: 'var(--font-sans-3)',
+  fontSize: '0.62rem',
+  letterSpacing: '0.10em',
   textTransform: 'uppercase',
-  color: 'var(--text-muted)',
+  color: 'var(--stone)',
+  fontWeight: 600,
   marginBottom: 6,
 }
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
-  background: 'rgba(3, 11, 7, 0.7)',
-  border: '1px solid rgba(184, 255, 71, 0.12)',
-  borderRadius: 8,
+  background: 'var(--parchment)',
+  border: '1px solid var(--border-mid)',
   padding: '9px 12px',
-  fontSize: '0.85rem',
-  color: 'var(--text-primary)',
-  fontFamily: 'var(--font-dm)',
-  transition: 'border-color 0.2s, box-shadow 0.2s',
+  fontSize: '0.88rem',
+  fontFamily: 'var(--font-sans-3)',
+  color: 'var(--near-black)',
+  transition: 'border-color 0.15s, box-shadow 0.15s',
 }
 
 export default function ToolForm({ initial, onSave, onCancel }: Props) {
@@ -70,7 +70,7 @@ export default function ToolForm({ initial, onSave, onCancel }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
         <div>
           <label style={labelStyle}>Tool Name *</label>
@@ -106,14 +106,14 @@ export default function ToolForm({ initial, onSave, onCancel }: Props) {
             style={{ ...inputStyle, cursor: 'pointer' }}
           >
             {CATEGORIES.map(c => (
-              <option key={c.value} value={c.value} style={{ background: '#0C1D16' }}>
+              <option key={c.value} value={c.value}>
                 {c.label}
               </option>
             ))}
           </select>
         </div>
         <div>
-          <label style={labelStyle}>Monthly ($) *</label>
+          <label style={labelStyle}>Monthly Cost ($) *</label>
           <input
             required
             type="number"
@@ -123,7 +123,7 @@ export default function ToolForm({ initial, onSave, onCancel }: Props) {
             onChange={e => set('monthlyCost', e.target.value)}
             placeholder="0.00"
             className="inp"
-            style={{ ...inputStyle, fontFamily: 'var(--font-space)' }}
+            style={{ ...inputStyle, fontFamily: 'var(--font-mono-jb)' }}
           />
         </div>
         <div>
@@ -134,17 +134,17 @@ export default function ToolForm({ initial, onSave, onCancel }: Props) {
             value={form.seats}
             onChange={e => set('seats', e.target.value)}
             className="inp"
-            style={{ ...inputStyle, fontFamily: 'var(--font-space)' }}
+            style={{ ...inputStyle, fontFamily: 'var(--font-mono-jb)' }}
           />
         </div>
       </div>
 
       <div>
-        <label style={labelStyle}>Description / Features</label>
+        <label style={labelStyle}>Description / Key Features</label>
         <textarea
           value={form.description}
           onChange={e => set('description', e.target.value)}
-          placeholder="Key capabilities, integrations, what this tool does..."
+          placeholder="Key capabilities, integrations, what this tool does…"
           rows={2}
           className="inp"
           style={{ ...inputStyle, resize: 'none' }}
@@ -155,47 +155,29 @@ export default function ToolForm({ initial, onSave, onCancel }: Props) {
         <button
           type="button"
           onClick={onCancel}
+          className="btn-ghost"
           style={{
             padding: '8px 18px',
-            fontSize: '0.8rem',
-            color: 'var(--text-muted)',
-            background: 'transparent',
-            border: '1px solid var(--border)',
-            borderRadius: 8,
-            cursor: 'pointer',
-            fontFamily: 'var(--font-space)',
+            fontFamily: 'var(--font-sans-3)',
+            fontSize: '0.75rem',
+            fontWeight: 600,
             letterSpacing: '0.04em',
-            transition: 'color 0.2s, border-color 0.2s',
-          }}
-          onMouseEnter={e => {
-            (e.target as HTMLElement).style.color = 'var(--text-primary)'
-            ;(e.target as HTMLElement).style.borderColor = 'var(--border-hover)'
-          }}
-          onMouseLeave={e => {
-            (e.target as HTMLElement).style.color = 'var(--text-muted)'
-            ;(e.target as HTMLElement).style.borderColor = 'var(--border)'
           }}
         >
-          CANCEL
+          Cancel
         </button>
         <button
           type="submit"
-          className="btn-lime"
+          className="btn-primary"
           style={{
             padding: '8px 22px',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            fontFamily: 'var(--font-space)',
-            letterSpacing: '0.06em',
-            background: 'var(--lime)',
-            color: '#030B07',
-            border: 'none',
-            borderRadius: 8,
-            cursor: 'pointer',
-            transition: 'box-shadow 0.2s',
+            fontFamily: 'var(--font-sans-3)',
+            fontSize: '0.75rem',
+            fontWeight: 600,
+            letterSpacing: '0.04em',
           }}
         >
-          {initial ? 'SAVE_CHANGES' : 'ADD_TOOL'}
+          {initial ? 'Save Changes' : 'Add Tool'}
         </button>
       </div>
     </form>
